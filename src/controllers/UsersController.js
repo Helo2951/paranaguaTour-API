@@ -15,7 +15,7 @@ class UsersController {
             password: hashedPassword,
             isAdmin
         })
-        return res.status(201).json('success');
+        return res.status(201).json('Usuário criado com sucesso');
     }
 
     async listUsers(req, res) {
@@ -27,7 +27,7 @@ class UsersController {
         const { id } = req.params;
         await knex('users').where({id}).delete();
 
-        return res.status(200).json('success');
+        return res.status(200).json('Ususário deletado com sucesso');
     }
 
     async updateUser(req, res) {
@@ -41,7 +41,7 @@ class UsersController {
             email,
             password: hashedPassword,
         })
-        return res.status(200).json('success');
+        return res.status(200).json('Usuário atualizado com sucesso');
     }
 }
 

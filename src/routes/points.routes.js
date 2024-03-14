@@ -9,6 +9,7 @@ pointsRoutes.post('/', pointsControllers.createPoints);
 pointsRoutes.get('/', pointsControllers.listPoints);
 pointsRoutes.delete('/:id', pointsControllers.deletePoints);
 pointsRoutes.put('/:id', pointsControllers.updatePoints);
+// pointsRoutes.patch('/:id', pointsControllers.updateRating);
 
 module.exports = pointsRoutes
 
