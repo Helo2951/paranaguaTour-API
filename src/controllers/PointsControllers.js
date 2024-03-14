@@ -38,15 +38,5 @@ class PointsController {
         })
         return res.status(200).json('Ponto atualizado com sucesso')
     }
-    // async updateRating(req, res){
-    //     const {id} = req.params
-    //     const totalRating = await knex('comments').sum('rating').where({points_id: id})
-    //     const totalComments = await knex('comments').where({points_id: id}).count()
-    //     const result = totalRating.find(rating => rating.id === id)
-
-    //     console.log(result)
-
-
-    // }
 }
 module.exports = PointsController

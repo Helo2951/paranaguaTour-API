@@ -10,7 +10,6 @@ pointsRoutes.post('/:user_id',checkIsAdmin, pointsControllers.createPoints);
 pointsRoutes.get('/', pointsControllers.listPoints);
 pointsRoutes.delete('/:id/:user_id', checkIsAdmin, pointsControllers.deletePoints);
 pointsRoutes.put('/:id/:user_id', checkIsAdmin, pointsControllers.updatePoints);
-// pointsRoutes.patch('/:id', pointsControllers.updateRating);
 
 module.exports = pointsRoutes
 

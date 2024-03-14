@@ -3,15 +3,24 @@ const knex = require('../database/knex')
 class CommentsControllers {
     async create(req, res) {
     const {title, comment} = req.body
-    const {user_id, points_id} = req.params
+    const {user_id, points_id, rating} = req.params
     
     await knex('comments').insert({
         title,
         comment,
         user_id,
-        points_id
+        points_id,
+        rating
     })
-    return res.status(201).json('Comentário criado com sucesso')
+
+    const ratingValue = await knex('comments').where({points_id: points_id})
+        
+    const totalRating = ratingValue.map(rate => rate.ratingValue).reduce((acc, current) => acc + current)
+    const totalComments = ratingValue.length
+
+    const media = totalRating / totalComments
+    
+    return res.status(201).json(media)
     }
     async listComments(req, res) {
         const comments = await knex('comments');
@@ -33,6 +42,10 @@ class CommentsControllers {
             comment,
         })
         return res.status(200).json('sucess')
+    }
+
+    async updateRating(pointId){
+        
     }
 }
 
