@@ -1,15 +1,22 @@
 const {Router} = require('express')
 const UsersControllers = require('../controllers/UsersController')
 const checkIsAdmin = require('../middlewares/checkIsAdmin')
+const ensureAuthenticated = require('../middlewares/ensureAuthenticated')
 
 const usersRoutes = Router()
 
 const usersControllers = new UsersControllers()
 
 usersRoutes.post('/', usersControllers.create)
-usersRoutes.get('/:user_id', checkIsAdmin, usersControllers.listUsers)
-usersRoutes.delete('/:id/:user_id', checkIsAdmin, usersControllers.deleteUser)
+
+usersRoutes.use(ensureAuthenticated)
+
 usersRoutes.put('/:id', usersControllers.updateUser)
+
+usersRoutes.use(checkIsAdmin)
+
+usersRoutes.get('/', usersControllers.listUsers)
+usersRoutes.delete('/:id/', usersControllers.deleteUser)
 
 module.exports = usersRoutes
 
