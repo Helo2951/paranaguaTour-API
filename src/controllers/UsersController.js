@@ -41,26 +41,34 @@ class UsersController {
     }
 
     async updateUser(req, res) {
-        const { id } = req.params;
         const { name, email, password } = req.body;
+        const { id } = req.user;
 
-        if (!name ||!email ||!password) {
-            return res.status(400).json({ error: 'Preencha todos os campos' });
+        console.log(id);
+
+        if (email) {
+            const userExists = await knex('users').where({email}).first();
+            if (userExists) {
+                throw new AppError('Usuário já cadastrado');
+            }
         }
 
-        const userExists = await knex('users').where({email}).first();
-        if (userExists) {
-            throw new AppError('Usuário já cadastrado');
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 8);
+
+            await knex('users').where({id}).update({
+                name,
+                email,
+                password: hashedPassword,
+            })
+            return res.status(200).json('Usuário atualizado com sucesso');
+        } else {
+            await knex('users').where({id}).update({
+                name,
+                email
+            })
+            return res.status(200).json('Usuário atualizado com sucesso');
         }
-
-        const hashedPassword = await bcrypt.hash(password, 8);
-
-        await knex('users').where({id}).update({
-            name,
-            email,
-            password: hashedPassword,
-        })
-        return res.status(200).json('Usuário atualizado com sucesso');
     }
 }
 

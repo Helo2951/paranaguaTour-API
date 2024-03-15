@@ -6,12 +6,13 @@ const commentsRoutes = Router()
 
 const commentsControllers = new CommentsControllers()
 
+commentsRoutes.get('/', commentsControllers.listComments);
+
 commentsRoutes.use(ensureAuthenticated)
 
 commentsRoutes.post('/:points_id', commentsControllers.create);
-commentsRoutes.get('/', commentsControllers.listComments);
-commentsRoutes.delete('/:id', commentsControllers.deleteComment);
-commentsRoutes.put('/:id', commentsControllers.updateComment);
+commentsRoutes.delete('/:id', commentsControllers.deleteComment); // colocar verificaçao apenas para o usuario ou o adm
+commentsRoutes.put('/:id', commentsControllers.updateComment); // colocar verificaçao apenas para o usuario ou o adm
 
 module.exports = commentsRoutes
 

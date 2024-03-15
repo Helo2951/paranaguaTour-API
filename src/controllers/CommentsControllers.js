@@ -5,12 +5,12 @@ class CommentsControllers {
     async create(req, res) {
     const {title, comment, rating} = req.body
     const {points_id} = req.params
-    const {user_id} = req.user
+    const {id} = req.user
     
     await knex('comments').insert({
         title,
         comment,
-        user_id,
+        user_id: id,
         points_id,
         rating   
     })

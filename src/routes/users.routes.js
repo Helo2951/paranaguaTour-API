@@ -11,7 +11,7 @@ usersRoutes.post('/', usersControllers.create)
 
 usersRoutes.use(ensureAuthenticated)
 
-usersRoutes.put('/:id', usersControllers.updateUser)
+usersRoutes.put('/', usersControllers.updateUser)
 
 usersRoutes.use(checkIsAdmin)
 
