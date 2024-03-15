@@ -1,15 +1,16 @@
 const knex = require('../database/knex');
+const AppError = require('../utils/AppError');
 
 async function checkIsAdmin(req, res, next) {
-    const { user_id } = req.params;
+    const { id } = req.user;
     
-    const user = await knex('users').where({id: user_id}).first()
+    const user = await knex('users').where({id}).first()
 
     if(!user){
-        return res.status(400).json('Usuário não encontrado')
+        throw new AppError('Usuário não encontrado')
     }
     if(user.isAdmin === 0){
-        return res.status(401).json('Você não tem acesso a esse recurso')
+       throw new AppError('Você não tem acesso a esse recurso')
     }
 
     next()
