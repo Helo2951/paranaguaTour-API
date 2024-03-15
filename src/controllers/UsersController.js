@@ -1,9 +1,19 @@
 const knex = require('../database/knex');
 const bcrypt = require('bcryptjs');
+const AppError = require('../utils/AppError');
 
 class UsersController {
     async create(req, res) {
         const { name, email, password } = req.body;
+
+        if (!name ||!email ||!password) {
+            return res.status(400).json({ error: 'Preencha todos os campos' });
+        }
+
+        const userExists = await knex('users').where({email}).first();
+        if (userExists) {
+            throw new AppError('Usuário já cadastrado');
+        }
 
         const isAdmin = false
 
@@ -33,6 +43,15 @@ class UsersController {
     async updateUser(req, res) {
         const { id } = req.params;
         const { name, email, password } = req.body;
+
+        if (!name ||!email ||!password) {
+            return res.status(400).json({ error: 'Preencha todos os campos' });
+        }
+
+        const userExists = await knex('users').where({email}).first();
+        if (userExists) {
+            throw new AppError('Usuário já cadastrado');
+        }
 
         const hashedPassword = await bcrypt.hash(password, 8);
 
