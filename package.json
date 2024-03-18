@@ -15,7 +15,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "migrate": "npx knex migrate:latest",
+    "seeds": "npx knex seed:run"
   },
   "name": "tourism",
   "version": "1.0.0",
