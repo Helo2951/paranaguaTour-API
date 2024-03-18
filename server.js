@@ -3,7 +3,7 @@ require('express-async-errors')
 const express = require('express');
 require('dotenv').config()
 const cors = require('cors')
-const routes = require("../API/src/routes")
+const routes = require("./src/routes")
 
 const AppError = require('./src/utils/AppError')
 
