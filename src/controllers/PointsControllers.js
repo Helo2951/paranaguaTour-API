@@ -20,6 +20,11 @@ class PointsController {
         const points = await knex('points');
         return res.status(200).json(points)
     }
+    async listPointsById(req, res) {
+        const {id} = req.params
+        const points = await knex('points').where({id})
+        return res.status(200).json(points)
+    }
     async deletePoints(req, res) {
         const {id} = req.params;
         await knex('points').where({id}).delete()

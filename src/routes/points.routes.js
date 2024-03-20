@@ -8,6 +8,7 @@ const pointsRoutes = Router()
 const pointsControllers = new PointsControllers()
 
 pointsRoutes.get('/', pointsControllers.listPoints);
+pointsRoutes.get('/:id', pointsControllers.listPointsById);
 
 pointsRoutes.use(ensureAuthenticated)
 pointsRoutes.use(checkIsAdmin)
