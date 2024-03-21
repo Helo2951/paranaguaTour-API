@@ -27,6 +27,11 @@ class CommentsControllers {
         const comments = await knex('comments');
         return res.status(200).json(comments);
     }
+    async listCommentsById(req, res) {
+        const {id} = req.params
+        const comments = await knex('comments').where({points_id: id})
+        return res.status(200).json(comments)
+    }
     async deleteComment(req, res) {
         const {id} = req.params;
 

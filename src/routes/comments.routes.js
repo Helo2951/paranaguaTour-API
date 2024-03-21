@@ -7,6 +7,7 @@ const commentsRoutes = Router()
 const commentsControllers = new CommentsControllers()
 
 commentsRoutes.get('/', commentsControllers.listComments);
+commentsRoutes.get('/:id', commentsControllers.listCommentsById);
 
 commentsRoutes.use(ensureAuthenticated)
 
