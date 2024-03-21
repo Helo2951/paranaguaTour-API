@@ -8,6 +8,7 @@ const usersRoutes = Router()
 const usersControllers = new UsersControllers()
 
 usersRoutes.post('/', usersControllers.create)
+usersRoutes.get('/:id', usersControllers.listUsersById)
 
 usersRoutes.use(ensureAuthenticated)
 
@@ -16,7 +17,6 @@ usersRoutes.put('/', usersControllers.updateUser)
 usersRoutes.use(checkIsAdmin)
 
 usersRoutes.get('/', usersControllers.listUsers)
-usersRoutes.get('/:id', usersControllers.listUsersById)
 usersRoutes.delete('/:id/', usersControllers.deleteUser)
 
 module.exports = usersRoutes
