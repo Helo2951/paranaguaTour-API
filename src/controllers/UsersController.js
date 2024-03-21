@@ -33,6 +33,12 @@ class UsersController {
         return res.status(200).json(users);
     }
 
+    async listUsersById(req, res) {
+        const {id} = req.params
+        const users = await knex('users').where({id})
+        return res.status(200).json(users)
+    }
+
     async deleteUser(req, res) {
         const { id } = req.params;
         await knex('users').where({id}).delete();
