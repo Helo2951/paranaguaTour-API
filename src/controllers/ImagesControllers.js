@@ -16,6 +16,11 @@ class ImagesControllers {
         const images = await knex('images');
         return res.status(200).json(images);
     }
+    async getImagesByPointsId(req, res) {
+        const {points_id} = req.params
+        const images = await knex('images').where({points_id})
+        return res.status(200).json(images)
+    }
 
     async deleteImages(req, res) {
         const {id} = req.params;

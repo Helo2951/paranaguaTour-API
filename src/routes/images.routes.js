@@ -8,6 +8,7 @@ const imagesRoutes = Router()
 const imagesControllers = new ImagesControllers()
 
 imagesRoutes.get('/', imagesControllers.getImages);
+imagesRoutes.get('/:points_id', imagesControllers.getImagesByPointsId);
 
 imagesRoutes.use(ensureAuthenticated)
 imagesRoutes.use(checkIsAdmin)
